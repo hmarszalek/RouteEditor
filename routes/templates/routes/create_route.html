@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Route</title>
+    <link rel="stylesheet" href="{% static 'routes/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+    </nav>
+
+    <div class="container">
+        <h2>Create a Route</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Route Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="background">Choose Background Image:</label>
+            <select name="background" id="background-select" required>
+                {% for background in backgrounds %}
+                    <option value="{{ background.id }}" data-img-url="{{ background.image.url }}">
+                        {{ background.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div id="preview-container">
+                <img id="background-preview" src="" alt="Selected background preview" />
+            </div>
+
+            <button type="submit">Create Route</button>
+        </form>
+    </div>
+    
+    <script>    
+        const select = document.getElementById("background-select");
+        const preview = document.getElementById("background-preview");
+    
+        function updatePreview() {
+            const selectedOption = select.options[select.selectedIndex];
+            const imageUrl = selectedOption.getAttribute("data-img-url");
+    
+            if (imageUrl) {
+                preview.src = imageUrl;
+                preview.style.display = "block";
+            } else {
+                preview.style.display = "none";
+            }
+        }
+    
+        select.addEventListener("change", updatePreview);
+        updatePreview();
+    </script>
+</body>
+</html>

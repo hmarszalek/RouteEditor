@@ -10,6 +10,7 @@
 <body>
     <nav>
         {% if user.is_authenticated %}
+            <a href="{% url 'create_route' %}">Create a New Route</a>
             <a href="{% url 'logout' %}">Log Out</a>
         {% else %}
             <a href="{% url 'login' %}">Log In</a>
