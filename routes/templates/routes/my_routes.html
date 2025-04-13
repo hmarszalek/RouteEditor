@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Routes</title>
+    <link rel="stylesheet" href="{% static 'routes/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'create_route' %}">Create a new route</a>
+        <a href="{% url 'logout' %}">Log out</a>
+    </nav>
+
+    <div class="container">
+        <h2>Your Routes</h2>
+
+        <ul>
+            {% for route in routes %}
+                <li>
+                    <a href="">{{ route.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if routes.count == 0 %}
+            <p>You don't have any routes yet. <a href="{% url 'create_route' %}">Create your first route!</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

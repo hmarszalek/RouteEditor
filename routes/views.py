@@ -43,3 +43,8 @@ def create_route(request):
         return redirect("home")
     backgrounds = BackgroundImage.objects.all()
     return render(request, "routes/create_route.html", {"backgrounds": backgrounds})
+
+@login_required
+def my_routes(request):
+    routes = Route.objects.filter(user=request.user)
+    return render(request, 'routes/my_routes.html', {'routes': routes})
