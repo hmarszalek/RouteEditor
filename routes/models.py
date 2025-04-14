@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class BackgroundImage(models.Model):
     name = models.CharField(max_length=100)
@@ -22,6 +23,10 @@ class RoutePoint(models.Model):
     name = models.CharField(max_length=100)
     x = models.PositiveIntegerField()
     y = models.PositiveIntegerField()
+
+    def clean(self):
+        if self.x < 0 or self.y < 0:
+            raise ValidationError("Coordinates must be non-negative")
 
     def __str__(self):
         return f"Point-of-{self.user}-on-Route-{self.route.name}-({self.x},{self.y})"
