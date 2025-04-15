@@ -66,4 +66,3 @@ class WebViewTests(TestCase):
         self.client.logout()
         response = self.client.get(reverse('my_routes'))
         self.assertRedirects(response, '/login/?next=' + reverse('my_routes'))
-

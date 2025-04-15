@@ -56,3 +56,19 @@ After applying the changes, the API will support the following endpoints:
 -   `POST /api/routes/{route_id}/points/`: Add a new point to the given route.
 -   `GET /api/routes/{route_id}/points/{point_id}/`: Retrieve details of a specific point.
 -   `DELETE /api/routes/{route_id}/points/{point_id}/`: Delete a specific point.
+
+# Tests
+
+Run all test:
+
+```bash
+python3 manage.py test routes.tests
+```
+
+Run individual tests:
+
+```bash
+python3 manage.py test routes.tests.test_models
+python3 manage.py test routes.tests.test_views
+python3 manage.py test routes.tests.test_api
+```
